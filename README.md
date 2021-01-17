@@ -10,7 +10,7 @@
 
 ### OVERVIEW:
 IOTB is an internet of things edge device implementation. The hardware has digital inputs and outputs and offers connectivity for analog sensors and extensions.
-Its firmware is open source and has various tcp/ip connection options according to needs.
+It has open source firmware and upload ready various tcp/ip connection options according to needs.
 
 **It is a platform**
 
