@@ -5,7 +5,7 @@
 
 #### Get expedited support or integration consultation for IOTB [from IOTECH](http://iotech.com.tr/)
 
-[![IOTECH](https://github.com/celikada/resources/blob/master/iotech-banner.png)](http://iotech.com.tr)
+[![IOTECH](http://iotech.com.tr/images/header_logo_tek.png)](http://iotech.com.tr)
 ---
 
 ### OVERVIEW:
