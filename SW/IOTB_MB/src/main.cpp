@@ -16,6 +16,10 @@
 #include <Adafruit_SHT31.h>
 #include <SoftwareSerial.h>
 
+#include <IWatchdog.h>
+
+#define WATCHDOG_SEC_MULTIPLIER 1000000
+
 int keyIndex = 0;                 // your network key Index number (needed only for WEP)
 
 const int ledPin = LED_BUILTIN;
@@ -74,24 +78,7 @@ int readCardTHM();
 
 
 
-void setup() {
-	pinMode(PC13, OUTPUT);  
-	digitalWrite(PC13, HIGH);   // turn the LED on (HIGH is the voltage level)                                                                                                                            
-  	delay(500);              // wait for a second                                                                                                                                                         
-  	digitalWrite(PC13, LOW);    // turn the LED off by making the voltage LOW                                                                                                                             
-  	delay(500);              // wait for a second          
-	digitalWrite(PC13, HIGH);   // turn the LED on (HIGH is the voltage level)                                                                                                                            
-  	delay(500);              // wait for a second                                                                                                                                                         
-  	digitalWrite(PC13, LOW);    // turn the LED off by making the voltage LOW                                                                                                                             
-  	delay(500);              // wait for a second          
-	digitalWrite(PC13, HIGH);   // turn the LED on (HIGH is the voltage level)                                                                                                                            
-  	delay(500);              // wait for a second                                                                                                                                                         
-  	digitalWrite(PC13, LOW);    // turn the LED off by making the voltage LOW                                                                                                                             
-  	delay(500);              // wait for a second          
-
-
-
-
+void setup() {        
 	//serialInit();//portlar yanlış olabilir çakılıyor
 	confInit();
   	ethernetInit();
@@ -99,6 +86,11 @@ void setup() {
 	mcpInit();
 	shtInit();
 	//volatilityInit();
+
+	// Initialize the IWDG with 4 seconds timeout.
+    // This would cause a CPU reset if the IWDG timer
+    // is not reloaded in approximately 4 seconds.
+    //IWatchdog.begin(10 * WATCHDOG_SEC_MULTIPLIER);
 }
 
 void loop() {
@@ -119,6 +111,7 @@ void loop() {
 		readHoldingRegsToConfig();
     }
   }
+  //IWatchdog.reload();
 }
 
 //------------------------------------------------------
