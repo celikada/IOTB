@@ -37,7 +37,7 @@ constexpr auto PQ8 = 15;
 
 //components&sensors
 DHT dht(NIT1, DHT22);
-SoftwareSerial espLine(4, 3); // RX, TX
+SoftwareSerial espLine(3, 4); // RX, TX
 Adafruit_MCP23017 mcp;
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 OneWire oneWire(NIT2);
@@ -57,7 +57,7 @@ uint8_t I6Val = 0;
 uint8_t I7Val = 0;
 uint8_t I8Val = 0;
 int soilMoistureValue = 0;
-float celsius;
+int soilTempValue = 0;
 
 //soil moisto cal const
 const int AirValue = 520;   
@@ -82,7 +82,8 @@ void SendToEsp();
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  espLine.begin(115200);
+
+  espLine.begin(9600);
   sensors.begin();
 	initDHT();
   mcpInit();
@@ -128,7 +129,7 @@ void loop() {
 
 void chkEspLine()
 {
-  if (espLine.available() > 0) {
+  while (espLine.available() > 0) {
     int inChar = espLine.read();
     // convert the incoming byte to a char and add it to the string:
     inString += (char)inChar;
@@ -285,7 +286,8 @@ void readMoisto()
 void readSoilTemp()
 {
   sensors.requestTemperatures();
-	celsius = sensors.getTempCByIndex(0);
+	float celsius = sensors.getTempCByIndex(0);
+  soilTempValue = celsius;
   Serial.print("Soil Temperature is: ");
 	Serial.println(sensors.getTempCByIndex(0)); // Why "byIndex"? You can have more than one IC on the same bus. 0 refers to the first IC on the wire
 }
@@ -306,16 +308,33 @@ Field 7 water_level
 bool SendTSFrame(int frame, int value)
 {
   long msg = value*10+frame;
+  Serial.print("SendTSFrame : ");
+  Serial.println(msg);
   espLine.println(msg);
+  chkEspLine();
   return true;
 }
 
 void SendToEsp()
 {
-  if (millis() > lastSendToESP + 5000) {
+  if (millis() > lastSendToESP + 300000) {
     lastSendToESP = millis();
+    
     SendTSFrame(1, DHTTempVal);
-    //SendTSFrame(2, DHTHumVal);
+    /**/
+    delay(2000);
+    SendTSFrame(2, DHTHumVal);
+    delay(2000);
+    SendTSFrame(3, soilTempValue);
+    delay(2000);
+    SendTSFrame(4, soilMoistureValue);
+    delay(2000);
+    SendTSFrame(5, THMVal);
+    delay(2000);
+    SendTSFrame(6, mcp.digitalRead(PQ1));
+    delay(2000);
+    SendTSFrame(7, I1Val);
+    
   }
   
 }

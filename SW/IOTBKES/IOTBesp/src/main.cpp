@@ -52,7 +52,7 @@ int ReadInt16(Stream* stream);
 void WriteInt16(Stream* stream, int i);
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   delay(100);
 
   WiFi.mode(WIFI_STA);
