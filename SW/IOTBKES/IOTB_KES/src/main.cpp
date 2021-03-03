@@ -7,6 +7,8 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+#define sendinterval 300000
+
 String inString = "";    // string to hold input
 unsigned long lastSendToESP = 0;
 
@@ -122,6 +124,9 @@ void loop() {
   readMoisto();
   readSoilTemp();
 
+  long countdown = (sendinterval + lastSendToESP - millis())/1000;
+  Serial.print("Countdown ");
+  Serial.println(countdown);
   Serial.println("------------------------------");
   SendToEsp();
   delay(2000);
