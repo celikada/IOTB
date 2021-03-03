@@ -1,9 +1,7 @@
 
 # IOTB
 ### Internet of Things Device
-
 [![IOTECH](https://github.com/celikada/eagle/blob/master/KMO_IO_M/V2_6OUT/iotb_v2_kartl%C4%B1.166.png)](http://iotech.com.tr)
-
 #### Version 3.0: 2021-1-17 [Wiki](https://github.com/celikada/IOTB/wiki)
 
 #### Get expedited support or integration consultation for IOTB [from IOTECH](http://iotech.com.tr/)
