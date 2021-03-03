@@ -1,6 +1,9 @@
 
 # IOTB
 ### Internet of Things Device
+
+[![IOTECH](https://github.com/celikada/eagle/blob/master/KMO_IO_M/V2_6OUT/iotb_v2_kartl%C4%B1.166.png)](http://iotech.com.tr)
+
 #### Version 3.0: 2021-1-17 [Wiki](https://github.com/celikada/IOTB/wiki)
 
 #### Get expedited support or integration consultation for IOTB [from IOTECH](http://iotech.com.tr/)
@@ -28,7 +31,6 @@ IOTB is a platform that users can create and upload a firmware which they needed
 9. Current protection for outputs.
 10. Voltage progection for outputs.
 
-[![IOTECH](https://github.com/celikada/eagle/blob/master/KMO_IO_M/V2_6OUT/iotb_v2_kartl%C4%B1.166.png)](http://iotech.com.tr)
 [![IOTECH](https://github.com/celikada/eagle/blob/master/KMO_IO_M/V2_6OUT/KMO_IO_MV2_6%20v2.png)](http://iotech.com.tr)
 [![IOTECH](https://github.com/celikada/eagle/blob/master/KMO_IO_M/V2_6OUT/KMO_IO_MV2_6%20v2_t.png)](http://iotech.com.tr)
 [![IOTECH](https://github.com/celikada/eagle/blob/master/KMO_IO_M/V2_6OUT/KMO_IO_MV2_6%20v2_b.png)](http://iotech.com.tr)
