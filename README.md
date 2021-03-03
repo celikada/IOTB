@@ -29,9 +29,9 @@ IOTB is a platform that users can create and upload a firmware which they needed
 10. Voltage progection for outputs.
 
 [![IOTECH](https://github.com/celikada/eagle/blob/master/KMO_IO_M/V2_6OUT/iotb_v2_kartl%C4%B1.166.png)](http://iotech.com.tr)
-[![IOTECH](http://iotech.com.tr/images/header_logo_tek.png)](http://iotech.com.tr)
-[![IOTECH](http://iotech.com.tr/images/header_logo_tek.png)](http://iotech.com.tr)
-[![IOTECH](http://iotech.com.tr/images/header_logo_tek.png)](http://iotech.com.tr)
+[![IOTECH](https://github.com/celikada/eagle/blob/master/KMO_IO_M/V2_6OUT/KMO_IO_MV2_6%20v2.png)](http://iotech.com.tr)
+[![IOTECH](https://github.com/celikada/eagle/blob/master/KMO_IO_M/V2_6OUT/KMO_IO_MV2_6%20v2_t.png)](http://iotech.com.tr)
+[![IOTECH](https://github.com/celikada/eagle/blob/master/KMO_IO_M/V2_6OUT/KMO_IO_MV2_6%20v2_b.png)](http://iotech.com.tr)
 
 STM32 architectute. Modbus and MQTT ready software.
 
