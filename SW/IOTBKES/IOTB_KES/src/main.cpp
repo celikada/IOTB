@@ -62,9 +62,17 @@ int soilMoistureValue = 0;
 int soilTempValue = 0;
 
 //soil moisto cal const
-const int AirValue = 520;   
-const int WaterValue = 260;  
+const int AirValue = 880;   
+const int WaterValue = 500;  
+int soilmoisturepercent=0;
 int intervals = (AirValue - WaterValue)/3;  
+//
+/*
+const int AirValue = 600;   //you need to replace this value with Value_1
+const int WaterValue = 350;  //you need to replace this value with Value_2
+int soilMoistureValue = 0;
+int soilmoisturepercent=0;
+*/
 //
 
 void chkEspLine();
@@ -273,18 +281,24 @@ void readMoisto()
   Serial.print("Soil Moisture Value: ");
   Serial.println(soilMoistureValue);  
   
+  soilmoisturepercent = map(soilMoistureValue, AirValue, WaterValue, 0, 100);
+  Serial.print("Soil Moisture Pers : ");
+  Serial.print(soilmoisturepercent);
+  Serial.print("%  , ");
+
 	if(soilMoistureValue > WaterValue && soilMoistureValue < (WaterValue + intervals)) 
 	{
-		 Serial.println("Very Wet"); 
+		 Serial.print("Very Wet"); 
 	} 
 	else if(soilMoistureValue > (WaterValue + intervals) && soilMoistureValue < (AirValue - intervals))
 	{
-  		Serial.println("Wet");
+  		Serial.print("Wet");
 	}
 	else if(soilMoistureValue < AirValue && soilMoistureValue > (AirValue - intervals))
 	{
-  		Serial.println("Dry");
+  		Serial.print("Dry");
 	}
+  Serial.println();
 	delay(100);
 }
 
@@ -306,8 +320,9 @@ Field 2 ambiance_hum
 Field 3 soil_temp
 Field 4 soil_hum
 Field 5 iotb_temp
-Field 6 pump_relay
+Field 6 soil_moisture_persantage
 Field 7 water_level
+Field 8 pump_relay
 */
 
 bool SendTSFrame(int frame, int value)
@@ -320,10 +335,28 @@ bool SendTSFrame(int frame, int value)
   return true;
 }
 
+/*
+original values:
+    Dry: (520 430]
+    Wet: (430 350]
+    Water: (350 260]
+
+IOTB values:
+    Dry: (700 580]
+    //Wet: (580 350]
+    //Water: (350 260]
+
+*/
+
+
 void SendToEsp()
 {
   if (millis() > lastSendToESP + 300000) {
     lastSendToESP = millis();
+    if(soilmoisturepercent > 20 && soilmoisturepercent < 60) 
+    {
+      mcp.digitalWrite(PQ8,HIGH);//drop water
+    }
     
     SendTSFrame(1, DHTTempVal);
     /**/
@@ -336,11 +369,13 @@ void SendToEsp()
     delay(2000);
     SendTSFrame(5, THMVal);
     delay(2000);
-    SendTSFrame(6, mcp.digitalRead(PQ1));
+    SendTSFrame(6, soilmoisturepercent);
     delay(2000);
     SendTSFrame(7, I1Val);
+    delay(2000);
+    SendTSFrame(8, mcp.digitalRead(PQ8));
     
   }
-  
+  mcp.digitalWrite(PQ8,LOW);//drop water end
 }
 
